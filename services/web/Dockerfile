@@ -1,4 +1,4 @@
-FROM metabox/base
+from blackymetabox/base
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 ###################################
