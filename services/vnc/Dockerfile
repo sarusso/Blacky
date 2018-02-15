@@ -1,4 +1,4 @@
-from blackymetabox/webvnc
+FROM blackymetabox/webvnc
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 # Install xvfb that triggers minimal install of X base packages and xterm as sample application

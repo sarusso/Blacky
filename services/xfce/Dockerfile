@@ -1,4 +1,4 @@
-from blackymetabox/vnc
+FROM blackymetabox/vnc
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 # Install Xfce (Forcing avoids problems like "10" owners/error: "shared/packages-wordlist doesn't exist")

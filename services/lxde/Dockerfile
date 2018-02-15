@@ -1,4 +1,4 @@
-from blackymetabox/vnc
+FROM blackymetabox/vnc
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 # Thanks to Doro Wu <fcwu.tw@gmail.com>
 

@@ -1,4 +1,4 @@
-from blackymetabox/base
+FROM blackymetabox/base
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 # Install avahi for network service discovery

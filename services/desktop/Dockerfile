@@ -1,4 +1,4 @@
-from blackymetabox/xfce
+FROM blackymetabox/xfce
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 # Add mouse wheel script

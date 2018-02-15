@@ -1,4 +1,4 @@
-from blackymetabox/vnc
+FROM blackymetabox/vnc
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 # Install Tab Window Manager 
