@@ -1,0 +1,21 @@
+FROM blacky-dockerops/base
+MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
+
+# Get plex
+RUN wget https://downloads.plex.tv/plex-media-server/1.3.4.3285-b46e0ea/plexmediaserver_1.3.4.3285-b46e0ea_amd64.deb
+RUN dpkg -i plexmediaserver_1.3.4.3285-b46e0ea_amd64.deb
+
+# Copy conf where plex is run on the "media" user (see base image for users) 
+COPY plexmediaserver /etc/default/
+
+# Create link to media home on /mnt/md1 (mounted trought volumes)
+RUN rm -rf /home/media
+RUN ln -s /mnt/md1/home/media /home/media
+
+# Setup supervisord
+COPY supervisord_plex.conf /etc/supervisor/conf.d/
+COPY run_Plex.sh /etc/supervisor/conf.d/
+RUN chmod 755 /etc/supervisor/conf.d/run_Plex.sh
+
+# No if net host
+#EXPOSE 32400

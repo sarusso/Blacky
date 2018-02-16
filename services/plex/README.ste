@@ -1,0 +1,1 @@
+Find modified files with: "find ./ | grep .or" and then diff
