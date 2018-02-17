@@ -26,11 +26,11 @@ RUN a2enmod headers
 RUN a2enmod proxy_wstunnel
  
 # Copy and enable conf for proxy
-COPY 001-proxy.conf /etc/apache2/sites-available/
+COPY 001-proxy-blacky.conf /etc/apache2/sites-available/001-proxy.conf
 RUN ln -s /etc/apache2/sites-available/001-proxy.conf /etc/apache2/sites-enabled/001-proxy.conf
 
 # We overwrite default Apache conf as we force https
-COPY 000-default.conf /etc/apache2/sites-available/
+COPY 000-default-blacky.conf /etc/apache2/sites-available/
 
 # The following is not really necessary as defaults are ok (it is the original file)
 COPY default-ssl.conf /etc/apache2/sites-available/
@@ -51,3 +51,8 @@ COPY prestartup_proxy.sh /prestartup/
 # reyns: expose 80/tcp
 # reyns: expose 443/tcp
 # reyns: expose 8088/tcp
+
+
+# Enable web content from md1
+RUN mv /var/www/html/ /var/www/or_html
+RUN ln -s /mnt/md1/www/ /var/www/html
