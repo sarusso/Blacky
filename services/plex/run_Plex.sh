@@ -1,3 +1,4 @@
+#!/bin/bash
 # Original conf
 #cat /etc/systemd/system/plexmediaserver.service
 #[Unit]
