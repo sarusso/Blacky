@@ -22,4 +22,4 @@ COPY run_Plex.sh /etc/supervisor/conf.d/
 RUN chmod 755 /etc/supervisor/conf.d/run_Plex.sh
 
 # Expose
-# Reyns: expose 32400/tcp
+# reyns: expose 32400/tcp
