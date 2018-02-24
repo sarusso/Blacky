@@ -78,5 +78,20 @@ Then:
 sudo update-grub
 
 
+#--------------------
+# Hamachi Vpn
+#--------------------
+
+Requires reconf:
+metabox/shell vpn
+sudo su
+hamachi login
+hamachi do-join 099-664-483 (empty pass)
+[Accept join request on  vpn.net]
+
+
+(hamachi, hamchi login, hamachi do-join 099-664-483)
+
+---------------------
 
 
