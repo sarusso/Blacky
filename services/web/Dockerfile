@@ -42,9 +42,12 @@ COPY index.html /var/www/html/
 RUN echo "listen 8088" >> /etc/apache2/ports.conf
 
 # Web user/pass
-RUN cd /data && htpasswd -bc htpasswd ste pippoplutoweno #Set password metapass for user metauser
-RUN cd /data && htpasswd -bc htpasswd giu pippoplutowena #Set password metapass for user metauser
-RUN ln -s /data/htpasswd /etc/apache2/htpasswd
+#RUN cd /data && htpasswd -bc htpasswd metauser metapass #Set password metapass for user metauser
+#RUN ln -s /data/htpasswd /etc/apache2/htpasswd
+
+# Custom user/pass
+RUN cd /data && htpasswd -bc /etc/apache2/htpasswd ste pippoplutoweno
+RUN cd /data && htpasswd -b /etc/apache2/htpasswd giu pippoplutowena
 
 # Prestartup
 COPY prestartup_proxy.sh /prestartup/
