@@ -64,7 +64,7 @@ Then:
 mount /mnt/md1
 
 # Start Blacky-DockerOps project
-cd /home/ste/Devel/workspaces/BlackyMetaBox/ && metabox/clean all,force=True && metabox/run all,conf=blacky
+sudo -i -u ste bash -c "cd /home/ste/Devel/workspaces/BlackyMetaBox/ && metabox/clean all,force=True && metabox/run all,conf=blacky"
 
 
 #--------------------
@@ -82,7 +82,7 @@ sudo update-grub
 # Hamachi Vpn
 #--------------------
 
-Requires reconf:
+Requires reconf if not copying over the data_conf dir:
 metabox/shell vpn
 sudo su
 hamachi login
