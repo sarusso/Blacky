@@ -18,5 +18,10 @@ COPY prestartup_xfce.sh /prestartup/
 COPY home_metauser_.config /home/metauser/.config
 RUN chown -R metauser:metauser /home/metauser/.config
 
+
+RUN apt-get install docker.io -y
+RUN usermod -aG docker metauser
+RUN usermod -aG docker ste
+
 # reyns: expose 8590/tcp
 # reyns: expose 5900/tcp
