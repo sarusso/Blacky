@@ -1,0 +1,45 @@
+#!/bin/bash
+set -e
+
+#===================================#
+#  Reyns project setup script v0.1  #
+#===================================#
+
+# Get current folder name
+FOLDER=${PWD##*/}
+
+echo ""
+
+REYNS_REPO=https://github.com/sarusso/Reyns.git
+REYNS_COMMIT_HASH=563c9cf69d13796840acdbd9c73a51affdb3b528
+
+# Check we are in the right place
+if [ ! -d ./services ]; then
+    echo "You must run this script from the project's root folder."
+    exit 1
+fi
+
+# Check requirements
+for REQUIREMENT in git python docker; do
+	if hash $REQUIREMENT 2>/dev/null; then
+	    echo "[OK] \"$REQUIREMENT\" found"
+	else
+	    echo "[ERROR] \"$REQUIREMENT\" is missing" 
+	    exit 1
+	fi
+done 
+
+# Check Reyns first clone
+if [ ! -d .Reyns ]; then
+    echo "[INFO] Installing \"reyns\"..."
+    git clone $REYNS_REPO .Reyns
+    cd .Reyns
+    git checkout $REYNS_COMMIT_HASH
+    echo "[OK] \"reyns\" installed"
+    cd ..
+else
+    echo "[OK] \"reyns\" found"
+fi
+
+# Call Reyns setup
+.Reyns/reyns setup
