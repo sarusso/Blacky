@@ -24,7 +24,6 @@ RUN useradd metauser -d /home/metauser -u 65529 -g 65529 -m -s /bin/bash
 
 
 # Blacky userers and UIDs
-#drwxr-xr-x  2 1005 1005 4.0K Sep 23 19:07 giu
 #drwxr-xr-x 12 1001 1001 4.0K Jul  2 10:43 media
 #drwxr-xr-x  2 1002 1002 4.0K Apr  3  2016 mity
 #drwxr-xr-x  5 1003 1003 4.0K Apr  2  2016 nino
@@ -38,8 +37,6 @@ RUN useradd media -m -s /bin/bash   # 1001
 RUN useradd mity -m -s /bin/bash    # 1002
 RUN useradd nino -m -s /bin/bash    # 1003
 RUN useradd trusso -m -s /bin/bash  # 1004
-RUN useradd giu -m -s /bin/bash     # 1005
-
 
 # Add user metauser to sudo
 RUN adduser metauser sudo

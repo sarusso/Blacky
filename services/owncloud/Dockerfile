@@ -1,14 +1,8 @@
 FROM blackymetabox/base
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
-###################################
-#
-#            A P A C H E
-#
-###################################
-
 # Install Apache
-RUN apt-get update #20161005
+RUN apt-get update
 RUN apt-get install -y apache2
 
 # Copy conf
@@ -23,7 +17,7 @@ RUN a2enmod env
 RUN a2enmod dir
 RUN a2enmod mime
 
-# Download ownCloud
+# Download OwnCloud
 RUN cd /var/www && wget https://download.owncloud.org/community/owncloud-9.1.1.zip
 RUN cd /var/www && unzip owncloud-9.1.1.zip && rm owncloud-9.1.1.zip
 
@@ -41,7 +35,7 @@ RUN apt-get install -y php5-intl php5-mcrypt php5-imagick
 # Install mysql (MariaDB)
 RUN apt-get -y install mariadb-server
 
-# Copy conf & creta log dir
+# Copy conf & create log dir
 RUN mkdir /var/run/mysqld
 RUN chown mysql:adm /var/run/mysqld
 COPY supervisord_mysqld.conf /etc/supervisor/conf.d/

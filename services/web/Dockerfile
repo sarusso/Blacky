@@ -46,8 +46,7 @@ RUN echo "listen 8088" >> /etc/apache2/ports.conf
 #RUN ln -s /data/htpasswd /etc/apache2/htpasswd
 
 # Custom user/pass
-RUN cd /data && htpasswd -bc /etc/apache2/htpasswd ste pippoplutoweno
-RUN cd /data && htpasswd -b /etc/apache2/htpasswd giu pippoplutowena
+RUN cd /data && htpasswd -bc /etc/apache2/htpasswd ste pippoplutoste
 
 # Prestartup
 COPY prestartup_proxy.sh /prestartup/
@@ -60,3 +59,8 @@ COPY prestartup_proxy.sh /prestartup/
 # Enable web content from md1
 RUN mv /var/www/html/ /var/www/or_html
 RUN ln -s /mnt/md1/www/ /var/www/html
+
+# Enable php
+RUN apt-get install -y libapache2-mod-php5
+RUN a2enmod php5
+RUN echo "short_open_tag = On" >> /etc/php5/apache2/php.ini

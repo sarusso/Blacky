@@ -3,11 +3,11 @@ $CONFIG = array (
   'instanceid' => 'oc2dq15on8ip',
   'passwordsalt' => 'yv5k+j+erg2vhT/xDUWKJ/Jp0arbkQ',
   'secret' => 'SRQo5VK5rYpMGzBPmzVyChWPBeHEFkov7PthTNGH6OieDAPc',
-  'trusted_domains' => 
+  'trusted_domains' =>
   array (
     0 => 'secure.blacky.terra32.net',
   ),
-  'datadirectory' => '/mnt/md1/www/owncloud/data',
+  'datadirectory' => '/mnt/md1/owncloud_data',
   'overwrite.cli.url' => 'http://secure.blacky.terra32.net/owncloud',
   'dbtype' => 'mysql',
   'version' => '9.1.1.3',
