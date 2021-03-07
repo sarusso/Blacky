@@ -10,8 +10,8 @@ COPY smb_blacky.conf /etc/samba/smb.conf
 
 # Create samba users. Linux user MUST exists!
 #RUN (echo metapass; echo metapass) | smbpasswd -a metauser
-RUN (echo pippoplutoweno; echo pippoplutoste) | smbpasswd -a ste
-RUN (echo pippoplutoweni; echo pippoplutomedia) | smbpasswd -a media
+RUN (echo pippoplutoste; echo pippoplutoste) | smbpasswd -a ste
+RUN (echo pippoplutomedia; echo pippoplutomedia) | smbpasswd -a media
 
 # Create link to home on /mnt/md1 (mounted trought volumes)
 RUN rm -rf /home/ste   && ln -s /mnt/md1/home/ste   /home/ste
