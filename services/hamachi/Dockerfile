@@ -3,7 +3,8 @@ MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 # Install avahi for network service discovery
 RUN apt-get update
-RUN wget https://www.vpn.net/installers/logmein-hamachi_2.1.0.174-1_amd64.deb
+#RUN wget https://www.vpn.net/installers/logmein-hamachi_2.1.0.174-1_amd64.deb
+COPY logmein-hamachi_2.1.0.174-1_amd64.deb /logmein-hamachi_2.1.0.174-1_amd64.deb
 RUN dpkg -i logmein-hamachi_2.1.0.174-1_amd64.deb
 
 # Setup supervisord
