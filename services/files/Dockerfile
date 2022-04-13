@@ -14,8 +14,8 @@ RUN (echo pippoplutoste; echo pippoplutoste) | smbpasswd -a ste
 RUN (echo pippoplutomedia; echo pippoplutomedia) | smbpasswd -a media
 
 # Create link to home on /mnt/md1 (mounted trought volumes)
-RUN rm -rf /home/ste   && ln -s /mnt/md1/home/ste   /home/ste
-RUN rm -rf /home/media && ln -s /mnt/md1/home/media /home/media
+#RUN rm -rf /home/ste   && ln -s /mnt/md1/home/ste   /home/ste
+#RUN rm -rf /home/media && ln -s /mnt/md1/home/media /home/media
 
 # Setup supervisord
 COPY supervisord_smbd.conf /etc/supervisor/conf.d/

@@ -26,6 +26,13 @@ RUN chown -R metauser:metauser /home/metauser/Desktop/
 # Shorter bash prompt
 RUN echo "PS1=\"\u@MetaBox:\W $ \"" >> /home/metauser/.bashrc
 
+# Chrome
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+RUN sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN apt-get update
+RUN apt-get install google-chrome-stable -y
+
 # reyns: expose 8590/tcp
 # reyns: expose 5900/tcp
+
 

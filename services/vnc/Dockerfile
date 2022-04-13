@@ -5,8 +5,8 @@ MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 RUN apt-get install xvfb xterm  -y
 
 # Install base packages for VNC server and headless desktop (2)
-RUN cd /opt && wget https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.8.0.x86_64.tar.gz -O tigervnc-1.8.0.x86_64.tar.gz \
-            && tar -zxvf tigervnc-1.8.0.x86_64.tar.gz \
+COPY tigervnc-1.8.0.x86_64.tar.gz /opt/tigervnc-1.8.0.x86_64.tar.gz
+RUN cd /opt && tar -zxvf tigervnc-1.8.0.x86_64.tar.gz \
             && mv tigervnc-1.8.0.x86_64 tigervnc
 
 # Supervisord configuration
