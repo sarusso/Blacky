@@ -1,4 +1,4 @@
-FROM blackymetabox/base
+FROM blacky/base
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 # Install avahi for network service discovery
@@ -14,10 +14,8 @@ COPY supervisord_hamachi.conf /etc/supervisor/conf.d/
 COPY prestartup_hamachi.sh /prestartup/
 
 # Move Hamachi config dir to data folder to allow persistency
+RUN mkdir /data
 RUN mv /var/lib/logmein-hamachi /data/logmein-hamachi
 RUN ln -s /data/logmein-hamachi /var/lib/logmein-hamachi
 
-# Disable ssh as this image will be run in "net host" mode
-RUN mv /etc/supervisor/conf.d/supervisord_sshd.conf /etc/supervisor/conf.d/supervisord_sshd.conf_disbaled
 
-# reyns: privileged

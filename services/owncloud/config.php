@@ -1,21 +1,38 @@
 <?php
 $CONFIG = array (
-  'instanceid' => 'oc2dq15on8ip',
-  'passwordsalt' => 'yv5k+j+erg2vhT/xDUWKJ/Jp0arbkQ',
-  'secret' => 'SRQo5VK5rYpMGzBPmzVyChWPBeHEFkov7PthTNGH6OieDAPc',
-  'trusted_domains' =>
+  'instanceid' => 'oc9jbykjpx1k',
+  'passwordsalt' => 'zSIPJRS2bZcBcBI0+BWL6bTOXb7g9Z',
+  'secret' => 'V8zG68KSG4mnw1vs3tq2dyWNqNbZWPfTrlE/b8kC/nYGspyG',
+  'trusted_domains' => 
   array (
-    0 => 'secure.blacky.terra32.net',
+    0 => '192.168.1.214:8080',
   ),
-  'datadirectory' => '/mnt/md1/owncloud_data',
-  'overwrite.cli.url' => 'http://secure.blacky.terra32.net/owncloud',
+  'datadirectory' => '/var/www/owncloud/data',
+  'overwrite.cli.url' => 'http://192.168.1.214:8080/owncloud',
   'dbtype' => 'mysql',
-  'version' => '9.1.1.3',
+  'version' => '10.11.0.6',
   'dbname' => 'owncloud',
   'dbhost' => 'localhost',
   'dbtableprefix' => 'oc_',
+  'mysql.utf8mb4' => true,
   'dbuser' => 'oc_ste',
-  'dbpassword' => 'qngNxb9PGAFxJid1AaD4sX1cJr/TOU',
+  'dbpassword' => '297gr30r',
+  'allow_user_to_change_mail_address' => '',
   'logtimezone' => 'UTC',
+  'apps_paths' => 
+  array (
+    0 => 
+    array (
+      'path' => '/var/www/owncloud/apps',
+      'url' => '/apps',
+      'writable' => false,
+    ),
+    1 => 
+    array (
+      'path' => '/var/www/owncloud/apps-external',
+      'url' => '/apps-external',
+      'writable' => true,
+    ),
+  ),
   'installed' => true,
 );

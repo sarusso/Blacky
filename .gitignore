@@ -43,42 +43,7 @@ pip-delete-this-directory.txt
 .settings
 
 #----------------
-# Web service
+# Data
 #----------------
 
-# Devel
-devel/*.sqlite3
-devel/eDjango
-devel/venv
-
-# Webapp service migrations
-services/web/code/migrations/*.py
-services/web/code/migrations/*.pyc
-!services/web/code/migrations/__init__.py
-
-
-# Keys and sensible (local) conf
-services/proxy/certificates/*
-services/web/db_conf.sh
-
-#---------------
-# Reyns
-#---------------
-.Reyns
-data_*
-host.conf
-reyns/*
-!reyns/setup
-
-# Daemon
-.update_in_progress_flag
-
-# BlackyMetabox
-data_*
-.project
-.pydevproject
-host.conf
-.DS_Store
-services/*_custom
-Reyns
-#services/base/keys
+data

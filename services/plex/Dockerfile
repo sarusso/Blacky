@@ -1,4 +1,4 @@
-FROM blackymetabox/base
+FROM blacky/base
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 # Install plex
@@ -21,5 +21,3 @@ COPY supervisord_plex.conf /etc/supervisor/conf.d/
 COPY run_Plex.sh /etc/supervisor/conf.d/
 RUN chmod 755 /etc/supervisor/conf.d/run_Plex.sh
 
-# Expose
-# reyns: expose 32400/tcp
