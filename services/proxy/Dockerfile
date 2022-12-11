@@ -1,4 +1,4 @@
-FROM blackymetabox/base
+FROM blacky/base
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 ###################################
@@ -20,7 +20,7 @@ RUN chmod 755 /etc/supervisor/conf.d/run_Apache.sh
 # Enable mod_proxy and SSL
 RUN a2enmod proxy
 RUN a2enmod proxy_http
-RUN sudo a2enmod ssl
+RUN  a2enmod ssl
 RUN a2enmod rewrite
 RUN a2enmod headers
 RUN a2enmod proxy_wstunnel
@@ -46,21 +46,18 @@ RUN echo "listen 8088" >> /etc/apache2/ports.conf
 #RUN ln -s /data/htpasswd /etc/apache2/htpasswd
 
 # Custom user/pass
+RUN mkdir /data
 RUN cd /data && htpasswd -bc /etc/apache2/htpasswd ste pippoplutoste
 
 # Prestartup
 COPY prestartup_proxy.sh /prestartup/
-
-# reyns: expose 80/tcp
-# reyns: expose 443/tcp
-# reyns: expose 8088/tcp
-
 
 # Enable web content from md1
 RUN mv /var/www/html/ /var/www/or_html
 RUN ln -s /mnt/md1/www/ /var/www/html
 
 # Enable php
-RUN apt-get install -y libapache2-mod-php5
-RUN a2enmod php5
-RUN echo "short_open_tag = On" >> /etc/php5/apache2/php.ini
+RUN apt-get install -y libapache2-mod-php
+RUN a2enmod php7.4
+RUN echo "short_open_tag = On" >> /etc/php/7.4/apache2/php.ini
+

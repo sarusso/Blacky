@@ -1,4 +1,4 @@
-FROM blackymetabox/base
+FROM blacky/base
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 # Install Apache
@@ -18,19 +18,24 @@ RUN a2enmod dir
 RUN a2enmod mime
 
 # Download OwnCloud
-RUN cd /var/www && wget https://download.owncloud.org/community/owncloud-9.1.1.zip
-RUN cd /var/www && unzip owncloud-9.1.1.zip && rm owncloud-9.1.1.zip
-
-# Copy onwCloud conf
-COPY config.php /var/www/owncloud/config/
+RUN cd /var/www && wget https://download.owncloud.com/server/stable/owncloud-10.11.0.zip
+RUN cd /var/www && unzip owncloud-10.11.0.zip && rm owncloud-10.11.0.zip
 
 # Give right permissions
 RUN chown -R www-data:www-data /var/www/owncloud
 
 # Install requirements for OwnCloud
-RUN apt-get install -y libapache2-mod-php5
-RUN apt-get install -y php5-gd php5-json php5-mysql php5-curl
-RUN apt-get install -y php5-intl php5-mcrypt php5-imagick
+#RUN apt-get install -y libapache2-mod-php7.4 php7.4-gd php7.4-json php7.4-mysql php7.4-curl php7.4-intl php7.4-imagick
+RUN sudo apt install -y php-fpm php-cgi
+RUN sudo apt install -y php
+RUN sudo apt install -y php-mysql php-mbstring php-intl php-imagick \
+       php-redis php-apcu php-igbinary php-gmp php-bcmath \
+       php-curl php-gd php-zip php-imap php-ldap php-bz2 \
+       php-ssh2 php-phpseclib php-common php-json php-xml \
+       php-dev libsmbclient-dev php-pear
+
+
+
 
 # Install mysql (MariaDB)
 RUN apt-get -y install mariadb-server
@@ -53,3 +58,15 @@ RUN ln -s /etc/apache2/sites-available/001-owncloud.conf /etc/apache2/sites-enab
 # Prestartup
 COPY prestartup-owncloud.sh /prestartup/
 
+# Apache php
+RUN apt-get install -y libapache2-mod-php
+RUN a2enmod php7.4
+
+# Owncloud conf
+COPY config.php /var/www/owncloud/config/
+RUN chown 33:33 /var/www/owncloud/config/config.php
+
+# Data & apps dir
+#RUN mv /var/www/owncloud/data /var/www/owncloud/data_vanilla
+RUN ln -s /mnt/md1/owncloud_data /var/www/owncloud/data 
+RUN mkdir /var/www/owncloud/apps-external

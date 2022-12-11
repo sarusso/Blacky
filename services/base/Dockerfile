@@ -1,8 +1,14 @@
-FROM reyns/reyns-base-ubuntu14.04
+FROM ubuntu:20.04
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
-# Update apt here so if the prject is build without cache we get a refresh
+# Always update
 RUN apt-get update
+
+# Set non-interactive
+ENV DEBIAN_FRONTEND noninteractive
+
+# Install utilities
+RUN apt-get install -y sudo nano telnet curl unzip wget supervisor build-essential git-core net-tools iproute2 iputils-ping python
 
 # Create the media user (used for audio/video serivces)
 # We chose GID 65527 and UID 65528 to try avoiding conflicts.
@@ -41,21 +47,43 @@ RUN useradd trusso -m -s /bin/bash  # 1004
 # Add user metauser to sudo
 RUN adduser metauser sudo
 
-
-# Prestartup
-COPY prestartup_base.sh /prestartup/
-
-# Disable reyns user over ssh to allow exposing ssh on a public IP (i.e. for the Desktop service)
-RUN echo "DenyUsers reyns" >> /etc/ssh/sshd_config
-
-# Add metabox rsa key
+# Add metauser rsa key
 COPY keys/metauser.rsa.pub /etc/ssh/metauser.rsa.pub
 RUN sudo mkdir -p /home/metauser/.ssh && ln -s /etc/ssh/metauser.rsa.pub /home/metauser/.ssh/authorized_keys && chown -R metauser:metauser /home/metauser/.ssh
 
 # Note 1: If you use the Samba service, you need to achange/dd the users even there.
 # Note 2: If you use the Vnc desktop service, you need to change/add the users even there.
-# Note 3: Vnc desktop still do not support multiuser.
+# Note 3: Vnc desktop still does not support multiuser.
 
 # Add the media user to the www-data group
 # to be able to access ownCloud data from Plex
 RUN usermod -a -G www-data media
+
+# No pass sudo
+COPY sudoers /etc/sudoers
+
+# Supervisord conf
+COPY supervisord.conf /etc/supervisor/
+
+#----------------------
+# Prestartup scripts
+#----------------------
+
+# Create dir for prestartup scripts and copy main script
+RUN mkdir /prestartup
+COPY prestartup.py /
+COPY prestartup_base.sh /prestartup/
+
+
+#----------------------
+# Entrypoint
+#----------------------
+
+# Copy entrypoint
+COPY entrypoint.sh /
+
+# Give right permissions
+RUN chmod 755 /entrypoint.sh
+
+# Set entrypoint
+ENTRYPOINT ["/entrypoint.sh"]

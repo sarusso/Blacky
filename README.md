@@ -13,64 +13,68 @@ This version is based on Ubuntu 14.04
 
 * Desktop: a Xfce desktop plus VNC and web-based VNC.
 
-* Web: web services, including access to Desktop's web-based VNC. Access it via http://localhost or http://ip_address (redirects automatically to secure connection over https)
+* Proxy: proxy and light web services, including access to Desktop's web-based VNC. Access it via http://localhost or http://ip_address (redirects automatically to secure connection over https)
 
-* Files: provides access for files in the "Data" folder of metauser home directory trough Samba (Windows File Sharing protocol).
+* Samba: provides access for files in the "Data" folder of metauser home directory trough Samba (Windows File Sharing protocol).
 
 * Zeroconf: provides zero configuration for services discovery when running on a LAN network or VPN. For example this allows to see the "Metabox" server in macOS Finder sidebar.
 
-* Vpn: provides access to the host through Hamachi VPN service. Requires creating an account on Hamachi's website. Read more below.
+* Hamache: provides access to the host through Hamachi VPN service. Requires creating an account on Hamachi's website. Read more below.
 
-
-## Setup
-
-    $ metabox/setup
 
 ## Build
 
-    $ metabox/build all
+    $ blacky/build [service]
 
 ## Run
 
-    $ metabox/run all
+    $ blacky/run [service]
 
 
 ## List
 
-    $ metabox/run ps
+    $ blacky/ps
 
 ## Shell
 
-    $ metabox/shell service_name (user automatically set to metauser)
-
+    $ blacky/shell service
 
 ## Stop
 
-    $ metabox/clean all
+    $ blacky/clean [service]
 
-## Update
+## Rerun
 
-    $ metabox/update
+    $ blacky/rerun [service]
 
-Note: you will be always able to revert to a specific verion. Just note down the version hash.
+## Logs
+
+    $ blacky/logs service [process]
+
+Examples:
+    
+    $ blacky/logs hamachi [hamachi]
+    $ blacky/logs samba [smbd,nmbd]
+    $ blacky logs proxy [apache]
+    $ blacky logs owncloud [apache,mysql]
 
 ## Authentication
 
 Default user is metauser. Default password for Web and Files services: "metapass". Change it!!
 
-For Web (with "web" service running):
+For Apache (with the service running):
 
-    $ metabox/shell web
+    $ blacky/shell apache
     $ cd /data && sudo htpasswd -bc htpasswd metauser YOUR_NEW_PASS
     $ exit
-    $ metabox/rerun web
+    $ blacky/rerun apache
 
-For Files (with "files" service running):
+For Samba (with the service running):
 
-    $ metabox/shell files
+    $ blacky/shell samba
     $ sudo bash -c "(echo YOUR_NEW_PASS; echo YOUR_NEW_PASS) | smbpasswd -a metauser"
     $ exit
-    $ metabox/rerun files
+    $ blacky/rerun samba
 
 
 ## Setting up VPN
@@ -79,8 +83,7 @@ MetaBox uses Hamachi to provide VPN access which, even if requires a third-party
 
 To set it up, first you need to go on http://vpn.net (Hamachi's website) and signup for a free account. Then you need to create a new network. We suggest type "mesh", without password, and to require members approval. Copy the network ID (in the format xxx-yyy-zzz, if you already created the network you can find it under the "Members" section). Then:
 
-    $ metabox/shell vpn
-    $ sudo su
+    $ blacky/shell hamachi
     $ hamachi login
     $ hamachi  # Will show status
     $ hamachi do-join xxx-yyy-zzz  # Type [enter] on password prompt
@@ -94,41 +97,6 @@ Now, on vpn.net, accept the new join request you will see. Then:
 The final step is to install the Hamachi client for tour laptop and join the network from there as well. Your MetaBox will be assigned a static private IP, which will never change (unless you delete MetaBox's data folder).
 
 
-## Customizing services
+Passwords:
 
-you can easily customize services, by several different ways. While they almost all require a certain degree of confidence with forking Git repositories and using some Reyns (MetabBox's oorechstrator) advanced feature, there is a extremy simple and starightforward way.
-
-Let's say that you want to customize the desktop service for example, by installing some libraries. You just nedd to copy the "desktop" folder in the "services" directory and name it "desktop_custom". Note that while the "_" is forbidden in MetaBox and Reyn's service names, in this case it is allowed as the servoice will still be named (and referenced to as) "desktop". In MetaBox's root folder just run:
-
-    $ cp -a services/desktop services/desktop_custom
-
-This will not interfere with MetaBox update system, as custom versions of services are not treated as part of MetaBox.
-
-You can now edit the "Dockerfile" inside the "desktop_custom" folder and for example add a new library:
-
-    RUN apt-get -y install yourlibrary 
-
-...and you will still run and build it as the "desktop" service, i.e.:
-
-    $ metabox/build all # Will include it in the build process
-    $ metabox/run all # Will run it instead of the original desktop one
-    $ metabox/build desktop # Will build it
-    $ metabox/run desktop,metauser # Will run it of the original desktop one
-
-You can also create a symbolic link to somwhere else, and in particular to a folder under version control (like Git) repository. So after the above copy command, you can do somethig like the following (always in In MetaBox's root folder):
-
-    $ mv services/desktop_custom /path/to/your/versioned/folder/desktop_custom
-	$ ln -s /path/to/your/versioned/folder/desktop_custom services/desktop_custom
-
-We strongly encourage you to always version your services or at leas to store them a service like Dropbox which does provide minimal version control.
-
-
-## Updating metabox
- You can update (or downgrade!) using the metabox/update command. Example:
- 
-    $ metabox/update 
-    This version hash is: "787d974".
-    I will now check for an update and, if found, I will rebuild MetaBox.
-    If you don't like the new version, you can revert to this one by running "metabox/update 787d974"
-    Do you want to proceed? (y/n)?
-
+Mysql: root:r92cg479, ox_ste:297gr30r

@@ -1,4 +1,4 @@
-FROM blackymetabox/base
+FROM blacky/base
 MAINTAINER Stefano Alberto Russo <stefano.russo@gmail.com>
 
 # Install Samba
@@ -20,6 +20,4 @@ RUN (echo pippoplutomedia; echo pippoplutomedia) | smbpasswd -a media
 # Setup supervisord
 COPY supervisord_smbd.conf /etc/supervisor/conf.d/
 COPY supervisord_nmbd.conf /etc/supervisor/conf.d/
-
-# reyns: expose 445/tcp
 
