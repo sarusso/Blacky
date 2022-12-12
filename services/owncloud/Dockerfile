@@ -70,3 +70,7 @@ RUN chown 33:33 /var/www/owncloud/config/config.php
 #RUN mv /var/www/owncloud/data /var/www/owncloud/data_vanilla
 RUN ln -s /mnt/md1/owncloud_data /var/www/owncloud/data 
 RUN mkdir /var/www/owncloud/apps-external
+
+# Finally make it the default stuff
+RUN mv /var/www/html /var/www/html_or
+RUN mv /var/www/owncloud /var/www/html

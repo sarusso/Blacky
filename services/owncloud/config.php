@@ -5,10 +5,11 @@ $CONFIG = array (
   'secret' => 'V8zG68KSG4mnw1vs3tq2dyWNqNbZWPfTrlE/b8kC/nYGspyG',
   'trusted_domains' => 
   array (
-    0 => '192.168.1.214:8080',
+    0 => '192.168.1.214',
+    1 => 'owncloud.blacky.terra32.net'
   ),
-  'datadirectory' => '/var/www/owncloud/data',
-  'overwrite.cli.url' => 'http://192.168.1.214:8080/owncloud',
+  'datadirectory' => '/var/www/html/data',
+  'overwrite.cli.url' => 'http://192.168.1.214:8080/',
   'dbtype' => 'mysql',
   'version' => '10.11.0.6',
   'dbname' => 'owncloud',
@@ -23,13 +24,13 @@ $CONFIG = array (
   array (
     0 => 
     array (
-      'path' => '/var/www/owncloud/apps',
+      'path' => '/var/www/html/apps',
       'url' => '/apps',
       'writable' => false,
     ),
     1 => 
     array (
-      'path' => '/var/www/owncloud/apps-external',
+      'path' => '/var/www/html/apps-external',
       'url' => '/apps-external',
       'writable' => true,
     ),

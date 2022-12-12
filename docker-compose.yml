@@ -10,7 +10,7 @@ services:
       - SAFEMODE=False
     privileged: true
     volumes:
-      - ./data/hamachi/data:/data
+      - ./data/hamachi:/data
     network_mode: "host"
 
   proxy:
@@ -20,8 +20,10 @@ services:
     restart: unless-stopped
     environment:
       - SAFEMODE=False
+      - BLACKY_HOST=blacky.terra32.net
     volumes:
       - /mnt/md1:/mnt/md1
+      - ./data/proxy/letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
       - "443:443"
